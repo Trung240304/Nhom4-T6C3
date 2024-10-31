@@ -38,5 +38,4 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
 
-
 }

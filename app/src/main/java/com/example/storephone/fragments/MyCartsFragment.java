@@ -33,5 +33,96 @@ import java.util.Objects;
 
 public class MyCartsFragment extends Fragment {
 
+    FirebaseFirestore db;
+    FirebaseAuth auth;
 
+    TextView overTotalAmount;
+    RecyclerView recyclerView;
+    MyCartAdapter cartAdapter;
+    List<MyCartModel> cartModelList;
+    int totalPrice = 0;
+
+    public MyCartsFragment() {
+        // Required empty public constructor
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View root = inflater.inflate(R.layout.fragment_my_carts, container, false);
+
+        db = FirebaseFirestore.getInstance();
+        auth = FirebaseAuth.getInstance();
+        recyclerView = root.findViewById(R.id.recyclerview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        overTotalAmount = root.findViewById(R.id.textView4);
+
+        LocalBroadcastManager.getInstance(requireActivity())
+                .registerReceiver(mMessageReceiver, new IntentFilter("MyTotalAmount"));
+
+        cartModelList = new ArrayList<>();
+        cartAdapter = new MyCartAdapter(getActivity(), cartModelList);
+        recyclerView.setAdapter(cartAdapter);
+
+        loadCartItems();
+
+        return root;
+    }
+
+    private void loadCartItems() {
+        db.collection("AddToCart")
+                .document(Objects.requireNonNull(auth.getCurrentUser()).getUid())
+                .collection("CurrentUser")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @SuppressLint("NotifyDataSetChanged")
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            cartModelList.clear();
+                            totalPrice = 0;
+                            for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
+                                String documentId = documentSnapshot.getId();
+                                MyCartModel cartModel = documentSnapshot.toObject(MyCartModel.class);
+                                if (cartModel != null) {
+                                    cartModel.setDocumentId(documentId);
+                                    cartModelList.add(cartModel);
+                                    totalPrice += cartModel.getTotalPrice();
+                                }
+                            }
+                            cartAdapter.notifyDataSetChanged();
+                            updateTotalAmountUI(totalPrice);
+                        }
+                    }
+                });
+    }
+
+    @SuppressLint("SetTextI18n")
+    private void updateTotalAmountUI(int totalAmount) {
+        NumberFormat numberFormat = NumberFormat.getInstance(new Locale("vi", "VN"));
+        overTotalAmount.setText("Tổng Hóa Đơn: " + numberFormat.format(totalAmount) + " đ");
+    }
+
+    public BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+        @SuppressLint("SetTextI18n")
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            int totalBill = intent.getIntExtra("totalAmount", 0);
+            updateTotalAmountUI(totalBill);
+        }
+    };
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadCartItems();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        LocalBroadcastManager.getInstance(requireActivity()).unregisterReceiver(mMessageReceiver);
+    }
 }
