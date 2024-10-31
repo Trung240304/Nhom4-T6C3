@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:background="@drawable/card_background">
+
+        <ImageView
+            android:id="@+id/rec_img"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/phonestore"/>
+
+        <TextView
+            android:id="@+id/rec_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="19sp"
+            android:text="@string/pro_name"
+            android:fontFamily="@font/alice"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/rec_dec"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/des"
+            android:textColor="@color/mauchudao"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ratingbar"/>
+
+            <TextView
+                android:id="@+id/rec_rating"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/rate"
+                android:layout_weight="1"
+                android:layout_marginTop="6dp"
+                android:textColor="@color/bluedam"/>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
