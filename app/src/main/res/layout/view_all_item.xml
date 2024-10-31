@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="10dp"
+    android:elevation="6dp"
+    android:layout_margin="8dp"
+    android:background="@color/white">
+
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="horizontal"
+android:background="@drawable/gradiant_background">
+
+<ImageView
+    android:id="@+id/view_img"
+    android:scaleType="centerCrop"
+    android:layout_width="150dp"
+    android:layout_height="170dp"
+    android:src="@drawable/phone"
+    android:background="@drawable/border"
+    android:contentDescription="@string/img_des_view_all"/>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginStart="10dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/name_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:fontFamily="@font/alice"
+        android:maxLines="1"
+        android:text="@string/name"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_marginTop="4dp" />
+
+    <TextView
+        android:id="@+id/desc_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="@string/des"
+        android:textColor="#607D8B"
+        android:textSize="16sp"
+        android:layout_marginTop="6dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/alice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/money"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/price_view"
+            android:textSize="23sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/alice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/bluedam"
+            android:text="@string/fif"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="2dp">
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ratingbar" />
+
+        <TextView
+            android:id="@+id/rating_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:text="@string/rate"
+            android:textColor="#9E9E9E"
+            android:layout_marginTop="6dp"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ic_forward_arrow"
+        android:contentDescription="@string/forword_arrow"/>
+
+</LinearLayout>
+
+</LinearLayout>
+
+    </androidx.cardview.widget.CardView>

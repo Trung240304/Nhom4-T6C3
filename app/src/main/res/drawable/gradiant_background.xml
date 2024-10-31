@@ -1,0 +1,11 @@
+<!-- res/drawable/gradient_background.xml -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:startColor="@color/meme"
+                android:endColor="@color/white"
+                android:angle="45"/> <!-- Diagonal gradient effect -->
+        </shape>
+    </item>
+</layer-list>
